@@ -48,7 +48,7 @@ namespace DB_Lab_2.Controllers
         // GET: Brands/Create
         public IActionResult Create()
         {
-            ViewBag.CountryId = new SelectList(_context.Countries, "Id", "Name");
+            ViewBag.CountryList = new SelectList(_context.Countries.ToList(), "Id", "Name");
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace DB_Lab_2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CountryId,Name")] Brand brand)
+        public async Task<IActionResult> Create(Brand brand)
         {
 
             bool duplicate = await _context.Brands.AnyAsync(d => d.Name.Equals(brand.Name));
@@ -75,7 +75,7 @@ namespace DB_Lab_2.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewBag.CountryId = new SelectList(_context.Countries, "Id", "Name", brand.CountryId);
+            ViewBag.CountryList = new SelectList(_context.Countries, "Id", "Name", brand.CountryId);
             return View(brand);
         }
 
@@ -101,7 +101,7 @@ namespace DB_Lab_2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CountryId,Name")] Brand brand)
+        public async Task<IActionResult> Edit(int id,Brand brand)
         {
             if (id != brand.Id)
             {
@@ -143,7 +143,7 @@ namespace DB_Lab_2.Controllers
                 //}
                 return RedirectToAction(nameof(Index));
             }
-            ViewBag.CountryId = new SelectList(_context.Countries, "Id", "Name", brand.CountryId);
+            ViewBag.CountryList = new SelectList(_context.Countries, "Id", "Name", brand.CountryId);
             return View(brand);
         }
 

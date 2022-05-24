@@ -37,7 +37,7 @@ namespace DB_Lab_2
             {
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.CountryId).HasColumnName("countryId");
+              //  entity.Property(e => e.CountryId).HasColumnName("countryId");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -47,7 +47,7 @@ namespace DB_Lab_2
                 entity.HasOne(d => d.Country)
                     .WithMany(p => p.Brands)
                     .HasForeignKey(d => d.CountryId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                   // .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Brands_Countries");
             }); 
 
