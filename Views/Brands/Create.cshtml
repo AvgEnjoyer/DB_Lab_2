@@ -28,9 +28,9 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Повернутися</a>
-</div>
+<form method="get" asp-action="Index">
+                        <input type="submit" class="btn btn-danger" value="Повернутися" />
+</form>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

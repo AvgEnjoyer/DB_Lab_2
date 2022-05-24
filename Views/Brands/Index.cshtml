@@ -36,34 +36,14 @@
                             <input type="submit" class="btn btn-primary mr-2" value="Список автомобілів" />
                         </form>
                         <form method="get" asp-action="Edit" asp-route-id="@item.Id">
-                            <input type="submit" class="btn btn-warning mr-2" value="Редагувати" />
+                            <input type="submit" class="btn btn-primary mr-2" value="Редагувати" />
                         </form>
-                        <button type="button" class="btn btn-danger mr-2" data-toggle="modal" data-target="@targetId">
-                            Видалити
-                        </button>
+                        <form method="post" asp-action="Delete" asp-route-id="@item.Id">
+                            <input type="submit" class="btn btn-danger mr-2" value="Видалити" />
+                        </form>
                     </div>
 
-                    <div class="modal fade" id="@modalId" tabindex="-1" role="dialog" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Попередження</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body delete-modal-body">
-                                    Ви впевнені, що хочете видалити цю марку?
-                                </div>
-                                <div class="modal-footer">
-                                    <form asp-action="Delete" asp-route-id="@item.Id">
-                                        <button type="submit" class="btn btn-danger">Так</button>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Ні</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </td>
             </tr>
         }
@@ -74,7 +54,7 @@
     <tr>
         <td>
             <form method="get" asp-action="Create">
-                <input type="submit" class="btn btn-success" value="Додати нову" />
+                <input type="submit" class="btn btn-primary" value="Додати нову" />
             </form>
         </td>
         <td></td>

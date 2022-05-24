@@ -32,7 +32,7 @@ namespace DB_Lab_2
         public string Description { get; set; } = null!;
 
         [Display(Name = "Марка")]
-        public virtual Brand Brand { get; set; } = null!;
+        public virtual Brand? Brand { get; set; }
         public virtual ICollection<Purchase> Purchases { get; set; }
     }
 }
