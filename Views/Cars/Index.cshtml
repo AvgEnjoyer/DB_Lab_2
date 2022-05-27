@@ -53,8 +53,9 @@ else
                 }
                 
                 <td>
+                    <div class="btn-toolbar">
                     <form method="get" asp-controller="Purchases" asp-action="Purchase">
-                        <input type="hidden" name="softwareId" value="@item.Id" />
+                        <input type="hidden" name="carId" value="@item.Id" />
                         <input type="hidden" name="brandId" value="@ViewBag.BrandId" />
                         <p>
                             <input type="submit" class="btn btn-success" value="Придбати" style="width:100px" />
@@ -68,7 +69,8 @@ else
                     </form>
                     <form method="post" asp-action="Delete" asp-route-id="@item.Id">
                             <input type="submit" class="btn btn-danger mr-2" value="Видалити" />
-                        </form>
+                    </form>
+                    </div>
                     @*<p>
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="@targetId" style="width:100px">
                             Видалити

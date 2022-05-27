@@ -1,0 +1,79 @@
+﻿@model IEnumerable<DB_Lab_2.Purchase>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@if (ViewBag.PersonId == 0)
+{
+    <h1>Покупки</h1>
+}
+else
+{
+    <h1>Покупки @ViewBag.Person</h1>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            @if (ViewBag.PersonId == 0)
+            {
+                <th>
+                    Email покупця
+                </th>
+            }
+            <th>
+                Назва авто
+            </th>
+            <th>
+                Марка
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @if (ViewBag.PersonId == 0)
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Person.Email)
+                    </td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.Car.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Car.Brand.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<table>
+    <tr>
+        @if (ViewBag.PersonId != 0)
+        {
+            <td>
+                <form method="get" asp-controller="Persons" asp-action="Index">
+                    <input type="submit" class="btn btn-primary" value="Назад до списку клієнтів" />
+                </form>
+            </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        }
+        <td>
+            <form method="get" asp-controller="Home" asp-action="Index">
+                <input type="submit" class="btn btn-primary" value="На головну" />
+            </form>
+        </td>
+    </tr>
+</table>
