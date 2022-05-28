@@ -1,0 +1,306 @@
+﻿@model Query
+
+@{
+    ViewData["Title"] = "Запити";
+}
+
+<h1>Запити</h1>
+<hr />
+
+<h3>Прості</h3>
+<hr />
+
+<p style="font-size:20px">
+    <b>Запит 1</b>
+</p>
+<p style="font-size:17px">
+    Знайти середню вартість автомобілів марки P.
+</p>
+<div class="row">
+    <div class="col-md-4">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-action="SimpleQuery1">
+            <input type="hidden" asp-for="CarName" value="dummy" />
+            <input type="hidden" asp-for="Price" value="0" />
+            <div class="form-group">
+                <label class="control-label">Назва марки Р</label>
+                <select asp-for="BrandName" asp-items="@ViewBag.DevNames" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Надіслати" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+<hr />
+
+<p style="font-size:20px">
+    <b>Запит 2</b>
+</p>
+<p style="font-size:17px">
+    Знайти імена та прізвища користувачів, що придбали хоча б один автомобіль марки Р.
+</p>
+<div class="row">
+    <div class="col-md-4">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-action="SimpleQuery2">
+            <input type="hidden" asp-for="CarName" value="dummy" />
+            <input type="hidden" asp-for="Price" value="0" />
+            <div class="form-group">
+                <label class="control-label">Назва марки Р</label>
+                <select asp-for="BrandName" asp-items="@ViewBag.DevNames" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Надіслати" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+<hr />
+
+<p style="font-size:20px">
+    <b>Запит 3</b>
+</p>
+<p style="font-size:17px">
+    Знайти назви та ціни всіх автомобілів усіх марок країни К.
+</p>
+<div class="row">
+    <div class="col-md-4">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-action="SimpleQuery3">
+            <input type="hidden" asp-for="CarName" value="dummy" />
+            <input type="hidden" asp-for="Price" value="0" />
+            <div class="form-group">
+                <label class="control-label">Назва країни К</label>
+                <select asp-for="CountryName" asp-items="@ViewBag.Countries" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Надіслати" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+<hr />
+
+<p style="font-size:20px">
+    <b>Запит 4</b>
+</p>
+<p style="font-size:17px">
+    Знайти назви марок усіх авто, придбаних користувачем з іменем І, прізвищем П та email-ом Е.
+</p>
+<div class="row">
+    <div class="col-md-4">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-action="SimpleQuery4">
+            <input type="hidden" asp-for="CarName" value="dummy" />
+            <input type="hidden" asp-for="Price" value="0" />
+            <div class="form-group">
+                <label class="control-label">Ім'я покупця І</label>
+                <select id="q4" asp-for="PersonName" asp-items="@ViewBag.CustNames" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Прізвище покупця П</label>
+                <select asp-for="PersonSurname" asp-items="@ViewBag.CustSurnames" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Email покупця Е</label>
+                <select asp-for="PersonEmail" asp-items="@ViewBag.CustEmails" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Надіслати" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+<hr />
+
+<p style="font-size:20px">
+    <b id="q5">Запит 5</b>
+</p>
+<p style="font-size:17px">
+    Знайти назви марок, які продають авто вартістю не В у.о.
+</p>
+<div class="row">
+    <div class="col-md-4">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-action="SimpleQuery5">
+            <input type="hidden" asp-for="CarName" value="dummy"/>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input maxlength="28" id="price" asp-for="Price" class="form-control"/>
+                <span class="text-danger">@ViewBag.PriceError</span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Надіслати" class="btn btn-success" onclick="submit5()"/>
+            </div>
+        </form>
+    </div>
+</div>
+<hr />
+
+<p style="font-size:20px">
+    <b>Запит 6</b>
+</p>
+<p style="font-size:17px">
+    Знайти марки, які не продають автомобілі з назвою Н.
+</p>
+<div class="row">
+    <div class="col-md-4">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-action="SimpleQuery6">
+            <input type="hidden" asp-for="Price" value="0" />
+            <div class="form-group">
+                <label class="control-label">Назва Н</label>
+                <input maxlength="50" asp-for="CarName" class="form-control" id="prodName" />
+                <span class="text-danger">@ViewBag.ProdNameError</span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Надіслати" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+<hr />
+
+<h3>Множинні</h3>
+<hr />
+
+<p style="font-size:20px">
+    <b>Запит 1</b>
+</p>
+<p style="font-size:17px">
+    Знайти назви країн, марки з яких продають авто принаймні за всіма тими цінами, що й марка з кодом К.
+</p>
+<div class="row">
+    <div class="col-md-4">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-action="AdvancedQuery1">
+            <input type="hidden" asp-for="CarName" value="dummy" />
+            <input type="hidden" asp-for="Price" value="0" />
+            <div class="form-group">
+                <label class="control-label">Код марки К</label>
+                <select asp-for="BrandId" asp-items="@ViewBag.DevIds" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Надіслати" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+<hr />
+
+<p style="font-size:20px">
+    <b>Запит 2</b>
+</p>
+<p style="font-size:17px">
+    Знайти прізвища користувачів, які придбали точно ті ж самі авто, що й користувач з email E.
+</p>
+<div class="row">
+    <div class="col-md-4">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-action="AdvancedQuery2">
+            <input type="hidden" asp-for="CarName" value="dummy" />
+            <input type="hidden" asp-for="Price" value="0" />
+            <div class="form-group">
+                <label class="control-label">Email E</label>
+                <select asp-for="PersonEmail" asp-items="@ViewBag.CustEmails" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Надіслати" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+<hr />
+
+<p style="font-size:20px">
+    <b>Запит 3</b>
+</p>
+<p style="font-size:17px">
+    Знайти прізвища та email-и користувачів з іменем І, які придбали всі наявні авто.
+</p>
+<div class="row">
+    <div class="col-md-4">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-action="AdvancedQuery3">
+            <input type="hidden" asp-for="CarName" value="dummy" />
+            <input type="hidden" asp-for="Price" value="0" />
+            <div class="form-group">
+                <label class="control-label">Ім'я І</label>
+                <select asp-for="CarName" asp-items="@ViewBag.CustNames" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Надіслати" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+<hr />
+
+<div class="container" style="display:none">
+    <h3>Запити від викладача</h3>
+    <hr />
+
+    <p style="font-size:20px;">
+        <b>Запит 1</b>
+    </p>
+    <p style="font-size:17px">
+        Знайти ..
+    </p>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="TeacherQuery1">
+                <input type="hidden" asp-for="CarName" value="dummy" />
+                <input type="hidden" asp-for="Price" value="0" />
+                <div class="form-group">
+
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Надіслати" class="btn btn-success" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr />
+
+    <p style="font-size:20px;">
+        <b>Запит 2</b>
+    </p>
+    <p style="font-size:17px">
+        Знайти ..
+    </p>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="TeacherQuery2">
+                <input type="hidden" asp-for="CarName" value="dummy" />
+                <input type="hidden" asp-for="Price" value="0" />
+                <div class="form-group">
+
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Надіслати" class="btn btn-success" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr />
+</div>
+
+
+<form method="get" asp-controller="Home" asp-action="Index">
+    <input type="submit" class="btn btn-primary" value="На головну" />
+</form>
+
+@section scripts
+{
+    <script>
+        window.addEventListener("load", function () {
+            if ('@ViewBag.ErrorFlag' == 1) {
+                document.getElementById("q4").scrollIntoView();
+            }
+            else if ('@ViewBag.ErrorFlag' == 2) {
+                document.getElementById("q5").scrollIntoView();
+            }
+        });
+    </script>
+}
