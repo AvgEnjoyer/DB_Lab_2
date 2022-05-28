@@ -239,6 +239,7 @@ namespace DB_Lab_2.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult SimpleQuery5(Query queryModel)
         {
+            
             if (ModelState.IsValid)
             {
                 string query = System.IO.File.ReadAllText(S5_PATH);
@@ -285,7 +286,7 @@ namespace DB_Lab_2.Controllers
             if (ModelState.IsValid)
             {
                 string query = System.IO.File.ReadAllText(S6_PATH);
-                query = query.Replace("X", "N\'" + queryModel.BrandName + "\'");
+                query = query.Replace("X", "N\'" + queryModel.CarName + "\'");
                 query = query.Replace("\r\n", " ");
                 query = query.Replace('\t', ' ');
                 queryModel.QueryId = "S6";
